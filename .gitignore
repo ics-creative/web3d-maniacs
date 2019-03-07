@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+/Icon
+
+node_modules
+*.css.map
+*.js.map
+
+.idea
+*.iml
+
+!*.gitkeep
+yarn.lock
+package-lock.json
