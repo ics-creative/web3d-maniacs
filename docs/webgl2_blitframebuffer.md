@@ -10,8 +10,10 @@ WebGL 2.0 で追加された`blitFramebuffer()`メソッドはフレームバッ
 WebGL 1.0 では、「テクスチャをちょっと画面に表示して確認したいな」、というときにわざわざスクリーンを覆う形に頂点を用意して、シェーダーでテクスチャを貼り付ける処理を記述する必要がありました。`blitFramebuffer()`メソッドは**頂点が不要で、シェーダーも使わず、ドローコールも行わずにテクスチャを画面に表示できるおもしろい機能**です。
 
 ## サンプルの紹介
-blitFramebuffer()メソッドを使ってWebGLのテクスチャを**頂点やシェーダーを使わずに**画面表示するサンプルを紹介します。
+`blitFramebuffer()`メソッドを使ってWebGLのテクスチャを**頂点やシェーダーを使わずに**画面表示するサンプルを紹介します。
+
 [![](../imgs/webgl2_blitframebuffer.png)](https://ics-creative.github.io/web3d-maniacs/samples/webgl2_blitframebuffer)
+
 - [サンプルを別ウインドウで再生する](https://ics-creative.github.io/web3d-maniacs/samples/webgl2_blitframebuffer)（[WebGL 2.0に対応したブラウザ](https://caniuse.com/#feat=webgl2)でご覧ください）
 - [サンプルのソースコードを確認する](../samples/webgl2_blitframebuffer)
 

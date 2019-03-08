@@ -23,7 +23,7 @@ const main = async () => {
     image.onload = () => {
       resolve(image);
     };
-    image.src = 'assets/logo.png';
+    image.src = 'assets/texture.jpg';
   });
 
   // テクスチャを作成、転送
