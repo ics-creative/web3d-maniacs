@@ -1,8 +1,8 @@
 ---
 title: WebGL 2.0 - blitFramebufferでフレームバッファーをコピーする
 author: 川勝 研太郎
-published_date: 2019-03-07
-modified_date: 2019-03-07
+published_date: 2019-03-08
+modified_date: 2019-03-08
 ---
 
 WebGL 2.0 で追加された`blitFramebuffer()`メソッドはフレームバッファー同士のコピーを行うAPIです。`blitFramebuffer()`メソッドを使うと、**テクスチャやオフスクリーンレンダリングで描画したフレームバッファーの内容を簡単に画面表示できます**。
