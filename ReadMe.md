@@ -1,4 +1,4 @@
-# Web3D maniacs
+# Web3D Maniacs
 
 Webの3D表現に関する発展的なチュートリアルを取り扱うサイトです。
 
