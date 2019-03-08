@@ -53,7 +53,7 @@ const main = async () => {
   );
   gl2.bindFramebuffer(gl2.FRAMEBUFFER, null);
 
-  // blitFramebuffer()で操作するフレームバッファーを指定
+  // blitFramebuffer()メソッドで操作するフレームバッファーを指定
   // 読み込み先にテクスチャをアタッチしたフレームバッファーを指定
   gl2.bindFramebuffer(gl2.READ_FRAMEBUFFER, frameBuffer);
   // 書き込み先にnull（デフォルトのフレームバッファー）を指定
