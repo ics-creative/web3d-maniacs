@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="google" content="notranslate" />
+    <title>WebGL 2.0 - renderbufferStorageMultisample</title>
+    <script defer src="js/script.js"></script>
+    <style>
+      .selectBox {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <p id="notSupportedDescription">
+        ※このデモはWebGL 2.0で作成しています。<a
+          href="https://caniuse.com/#feat=webgl2"
+          target="_blank"
+          >WebGL 2.0に対応したブラウザ</a
+        >でご覧ください。
+      </p>
+      <div id="content">
+        <canvas id="myCanvas"></canvas>
+        <div class="selectBox">
+          <label for="selectBox">描画モード：</label>
+          <select id="selectBox">
+            <option>通常のレンダリング</option>
+            <option>通常のオフスクリーンレンダリング</option>
+            <option
+              >マルチサンプリングを使用したオフスクリーンレンダリング</option
+            >
+          </select>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
