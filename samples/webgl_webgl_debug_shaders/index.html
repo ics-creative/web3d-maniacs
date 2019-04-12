@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="google" content="notranslate" />
+    <title>WebGL - WEBGL_debug_shaders</title>
+    <script defer src="js/script.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      textarea {
+        width: 600px;
+        height: 400px;
+      }
+      .textareaBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 20px;
+      }
+      .editor {
+        display: flex;
+        align-items: center;
+        margin: 0 0 60px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <p id="notSupportedDescription">
+        ※このデモはWEBGL_debug_shadersを使用しています。<a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_shaders#Browser_compatibility"
+          target="_blank"
+          >WEBGL_debug_shadersに対応したブラウザ</a
+        >でご覧ください。
+      </p>
+      <div id="content">
+        <div class="editor">
+          <div class="textareaBox">
+            <label for="vertexShaderSourceTextArea">頂点シェーダー</label>
+            <textarea id="vertexShaderSourceTextArea"></textarea>
+          </div>
+          →
+          <div class="textareaBox">
+            <label for="vertexShaderTranslatedTextArea"
+              >ANGLE変換後の頂点シェーダー（リンク前）</label
+            >
+            <textarea
+              id="vertexShaderTranslatedTextArea"
+              readonly="readonly"
+            ></textarea>
+          </div>
+          →
+          <div class="textareaBox">
+            <label for="vertexShaderLinkedTextArea"
+              >ANGLE変換後の頂点シェーダー（リンク後）</label
+            >
+            <textarea
+              id="vertexShaderLinkedTextArea"
+              readonly="readonly"
+            ></textarea>
+          </div>
+        </div>
+        <div class="editor">
+          <div class="textareaBox">
+            <label for="fragmentShaderSourceTextArea"
+              >フラグメントシェーダー</label
+            >
+            <textarea id="fragmentShaderSourceTextArea"></textarea>
+          </div>
+          →
+          <div class="textareaBox">
+            <label for="fragmentShaderTranslatedTextArea"
+              >ANGLE変換後のフラグメントシェーダー（リンク前）</label
+            >
+            <textarea
+              id="fragmentShaderTranslatedTextArea"
+              readonly="readonly"
+            ></textarea>
+          </div>
+          →
+          <div class="textareaBox">
+            <label for="fragmentShaderLinkedTextArea"
+              >ANGLE変換後のフラグメントシェーダー（リンク後）</label
+            >
+            <textarea
+              id="fragmentShaderLinkedTextArea"
+              readonly="readonly"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
