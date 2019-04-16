@@ -14,6 +14,10 @@ const main = async () => {
   }
   document.getElementById('notSupportedDescription').style.display = 'none';
 
+  ////////////////////////////////////////
+  // 頂点シェーダー
+  ////////////////////////////////////////
+
   // 頂点シェーダー用のテキストエリアを取得
   const vertexShaderSourceTextArea = document.getElementById(
     'vertexShaderSourceTextArea'
@@ -21,57 +25,45 @@ const main = async () => {
   const vertexShaderTranslatedTextArea = document.getElementById(
     'vertexShaderTranslatedTextArea'
   );
-  const vertexShaderLinkedTextArea = document.getElementById(
-    'vertexShaderLinkedTextArea'
-  );
 
-  // フラグメントシェーダー用のテキストエリアを取得
-  const fragmentShaderSourceTextArea = document.getElementById(
-    'fragmentShaderSourceTextArea'
-  );
-  const fragmentShaderTranslatedTextArea = document.getElementById(
-    'fragmentShaderTranslatedTextArea'
-  );
-  const fragmentShaderLinkedTextArea = document.getElementById(
-    'fragmentShaderLinkedTextArea'
-  );
-
-  // WebGLProgramを作成
-  const program = gl.createProgram();
   // 頂点シェーダーオブジェクトを作成
   const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-  gl.attachShader(program, vertexShader);
-  // フラグメントシェーダーオブジェクトを作成
-  const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-  gl.attachShader(program, fragmentShader);
-
-  const linkProgram = setupLinkProgram(
-    gl,
-    ext,
-    program,
-    vertexShader,
-    fragmentShader,
-    vertexShaderLinkedTextArea,
-    fragmentShaderLinkedTextArea
-  );
-
-  //// 頂点シェーダー
 
   // 頂点シェーダーの初期ソースコードを設定
   // language=GLSL
   vertexShaderSourceTextArea.value = `attribute vec3 position;
 attribute vec4 color;
 varying vec4 vColor;
-uniform float value;
+uniform float uniformValue;
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
 
+/**
+ * 使用されない関数
+ */
+float notUsedfunc(float value) {
+  return value * value;
+}
+
 void main() {
-  float value2 = value < 0.0 ? 1.0 : 2.0;
+  // 使用されない変数
+  float notUsedValue = 7.0 * sin(uniformValue);
+
+  // 最終的には使用されないが、代入が発生する変数
+  float notUsedForOutputValue;
+  notUsedForOutputValue = 9.0 * cos(uniformValue);
+    
+  // 三項演算子
+  float value = uniformValue < 0.0 ? 1.0 : 2.0;
+
+  // 254回以上のforループ
   for(int i = 0; i < 300; i++){
-    value2 += 0.1;
+    value *= value;
   }
-  vColor = color * value2;
+
+  vColor = color * value;
+
+  // 行列演算
   mat4 mvpMatrix = projectionMatrix * modelViewMatrix;
   gl_Position = mvpMatrix * vec4(position, 1.0);
 }`;
@@ -82,19 +74,39 @@ void main() {
     ext,
     vertexShader,
     vertexShaderSourceTextArea,
-    vertexShaderTranslatedTextArea,
-    linkProgram
+    vertexShaderTranslatedTextArea
   );
 
-  //// フラグメントシェーダー
+  ////////////////////////////////////////
+  // フラグメントシェーダー
+  ////////////////////////////////////////
+
+  // フラグメントシェーダー用のテキストエリアを取得
+  const fragmentShaderSourceTextArea = document.getElementById(
+    'fragmentShaderSourceTextArea'
+  );
+  const fragmentShaderTranslatedTextArea = document.getElementById(
+    'fragmentShaderTranslatedTextArea'
+  );
+
+  // フラグメントシェーダーオブジェクトを作成
+  const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
 
   // フラグメントシェーダーの初期ソースコードを設定
   // language=GLSL
   fragmentShaderSourceTextArea.value = `precision mediump float;
 varying vec4 vColor;
+uniform float uniformValue;
+
+/**
+ * 使用される関数
+ */
+float usedFunc(float value) {
+  return value * value;
+}
 
 void main() { 
-  gl_FragColor = vColor;
+  gl_FragColor = vColor * usedFunc(uniformValue);
 }`;
 
   // フラグメントシェーダーのエディターをセットアップ
@@ -103,8 +115,7 @@ void main() {
     ext,
     fragmentShader,
     fragmentShaderSourceTextArea,
-    fragmentShaderTranslatedTextArea,
-    linkProgram
+    fragmentShaderTranslatedTextArea
   );
 };
 
@@ -116,8 +127,7 @@ const setupShaderEditor = (
   ext,
   shader,
   shaderSourceTextArea,
-  shaderTranslatedTextArea,
-  linkProgram
+  shaderTranslatedTextArea
 ) => {
   const compileShader = () => {
     // エディターからシェーダーソースコードを取得
@@ -136,8 +146,6 @@ const setupShaderEditor = (
     } else {
       // コンパイル完了している場合、getTranslatedShaderSource()メソッドで変換済みシェーダーソースコードを表示
       shaderTranslatedTextArea.value = ext.getTranslatedShaderSource(shader);
-
-      linkProgram();
     }
   };
 
@@ -150,38 +158,6 @@ const setupShaderEditor = (
 
   // 初期値でコンパイル実行
   compileShader();
-};
-
-/**
- * シェーダーのエディターをセットアップします。
- */
-const setupLinkProgram = (
-  gl,
-  ext,
-  program,
-  vertexShader,
-  fragmentShader,
-  vertexShaderLinkedTextArea,
-  fragmentShaderLinkedTextArea
-) => {
-  return () => {
-    gl.linkProgram(program);
-    // リンク状態を取得
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      // リンク完了していない場合、エラーログを表示
-      const errorLog = gl.getProgramInfoLog(program);
-      vertexShaderLinkedTextArea.value = errorLog;
-      fragmentShaderLinkedTextArea.value = errorLog;
-    } else {
-      // リンク完了している場合、getTranslatedShaderSource()メソッドで変換済みシェーダーソースコードを表示
-      vertexShaderLinkedTextArea.value = ext.getTranslatedShaderSource(
-        vertexShader
-      );
-      fragmentShaderLinkedTextArea.value = ext.getTranslatedShaderSource(
-        fragmentShader
-      );
-    }
-  };
 };
 
 window.addEventListener('DOMContentLoaded', () => main());
