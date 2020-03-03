@@ -1,13 +1,12 @@
 const RAD = Math.PI / 180;
-const CANVAS_WIDTH = 512;
-const CANVAS_HEIGHT = 512;
+const CANVAS_WIDTH = 960;
+const CANVAS_HEIGHT = 540;
 
 // テクスチャ画像1枚ごとのサイズ
-const IMAGE_WIDTH = 256;
-const IMAGE_HEIGHT = 256;
+const IMAGE_WIDTH = 512;
+const IMAGE_HEIGHT = 512;
 
 // テクスチャ数
-const NUM_TEXTURES = 32;
 
 const main = async () => {
   // キャンバスをセットアップ
@@ -67,7 +66,7 @@ const main = async () => {
 
   for (let i = 0; i < NUM_TEXTURES; i++) {
     // テクスチャ画像の読み込み
-    const textureImage = await loadImage(`assets/${i}.jpg`);
+    const textureImage = await loadImage(`assets/photo_${('0000' + i).slice(-5)}.jpg`);
     // テクスチャ画像をキャンバスに描画
     context2d.drawImage(textureImage, 0, 0);
     // RGBA値の取得
