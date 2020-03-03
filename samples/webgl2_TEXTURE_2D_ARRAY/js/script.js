@@ -7,6 +7,7 @@ const IMAGE_WIDTH = 512;
 const IMAGE_HEIGHT = 512;
 
 // テクスチャ数
+const NUM_TEXTURES = 32;
 
 const main = async () => {
   // キャンバスをセットアップ
