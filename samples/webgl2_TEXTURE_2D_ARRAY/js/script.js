@@ -7,9 +7,12 @@ const IMAGE_WIDTH = 512;
 const IMAGE_HEIGHT = 512;
 
 // テクスチャ数
-const NUM_TEXTURES = 32;
+const NUM_TEXTURES = 50;
 
 const main = async () => {
+  const content = document.getElementById("content");
+  const notSupportedDescription = document.getElementById("notSupportedDescription");
+
   // キャンバスをセットアップ
   const canvas = document.getElementById('myCanvas');
   canvas.width = CANVAS_WIDTH;
@@ -19,19 +22,22 @@ const main = async () => {
   const gl2 = canvas.getContext('webgl2');
   if (!gl2) {
     // WebGL2をサポートしていない場合
-    document.getElementById('content').style.display = 'none';
+    content.style.display = 'none';
+    notSupportedDescription.style.display = 'block';
     return;
   }
 
   gl2.bindTexture(gl2.TEXTURE_2D_ARRAY, null);
   if (gl2.getError() !== gl2.NO_ERROR) {
     // WebGL2をサポートしているが、TEXTURE_2D_ARRAYのバインドをサポートしていない場合（Safari等）
-    document.getElementById('content').style.display = 'none';
+    content.style.display = 'none';
+    notSupportedDescription.style.display = 'block';
     return;
   }
 
-  document.getElementById('notSupportedDescription').style.display = 'none';
-  document.getElementById('container').style.width = `${CANVAS_WIDTH}px`;
+  const loading = document.getElementById("loading");
+  content.style.width = loading.style.width = `${CANVAS_WIDTH}px`;
+  content.style.height = loading.style.height = `${CANVAS_HEIGHT}px`;
 
   // テクスチャ設定の最大値を取得
   console.log('MAX_TEXTURE_IMAGE_UNITS: ', gl2.getParameter(gl2.MAX_TEXTURE_IMAGE_UNITS));
@@ -51,6 +57,9 @@ const main = async () => {
   gl2.enable(gl2.BLEND);
   gl2.blendFuncSeparate(gl2.SRC_ALPHA, gl2.ONE_MINUS_SRC_ALPHA, gl2.ONE, gl2.ONE);
 
+  // 背景色を描画
+  gl2.clear(gl2.COLOR_BUFFER_BIT);
+
   // テクスチャ画像のRGBA値取得用の2Dキャンバスを作成
   const canvas2d = document.createElement('canvas');
   canvas2d.width = IMAGE_WIDTH;
@@ -64,6 +73,9 @@ const main = async () => {
   // テクスチャ配列用のUint8Arrayを確保
   // 要素数: テクスチャ1枚の要素数 * テクスチャ数
   const pixelData = new Uint8Array(elementsPerTexture * NUM_TEXTURES);
+
+  // ローディング表示
+  loading.style.display = 'flex';
 
   for (let i = 0; i < NUM_TEXTURES; i++) {
     // テクスチャ画像の読み込み
@@ -104,6 +116,9 @@ const main = async () => {
   gl2.texParameteri(gl2.TEXTURE_2D_ARRAY, gl2.TEXTURE_WRAP_T, gl2.CLAMP_TO_EDGE);
   // ミップマップを作成
   gl2.generateMipmap(gl2.TEXTURE_2D_ARRAY);
+
+  // ローディング非表示
+  loading.style.display = 'none';
 
   gl2.useProgram(renderProgramSet.program);
 
