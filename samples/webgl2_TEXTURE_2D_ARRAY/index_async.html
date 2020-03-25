@@ -40,9 +40,16 @@
       color: #fff;
       text-align: center;
       font-size: 0.7rem;
-      line-height: 2rem;
       letter-spacing: 0.15em;
       animation: text-fade 300ms infinite linear;
+    }
+
+    .progress {
+      z-index: 1;
+      color: #fff;
+      text-align: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
     }
 
     @keyframes text-fade {
@@ -74,6 +81,7 @@
     <canvas id="myCanvas"></canvas>
     <div id="loading">
       <span class="title">LOADING</span>
+      <span class="progress"></span>
     </div>
   </div>
 </div>

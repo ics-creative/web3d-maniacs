@@ -132,8 +132,15 @@ const loadAndUploadTextures = async (gl2, loading) => {
     [imageIndexArr[i], imageIndexArr[r]] = [imageIndexArr[r], imageIndexArr[i]];
   }
 
+  const strLength = NUM_TEXTURES.toString().length;
+  const showLoadingProgress = progress => {
+    loading.querySelector('.progress').innerHTML = `${('0000' + progress).slice(-strLength)} / ${NUM_TEXTURES}`;
+  };
+
   // ローディング表示
   loading.style.display = 'flex';
+
+  showLoadingProgress(0);
 
   for (let i = 0; i < NUM_TEXTURES; i++) {
     // 少し遅延
@@ -160,6 +167,8 @@ const loadAndUploadTextures = async (gl2, loading) => {
       imageData.data
     );
     gl2.generateMipmap(gl2.TEXTURE_2D_ARRAY);
+
+    showLoadingProgress(i + 1);
   }
 
   // ローディング非表示

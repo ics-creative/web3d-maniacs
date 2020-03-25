@@ -74,8 +74,15 @@ const main = async () => {
   // 要素数: テクスチャ1枚の要素数 * テクスチャ数
   const pixelData = new Uint8Array(elementsPerTexture * NUM_TEXTURES);
 
+  const strLength = NUM_TEXTURES.toString().length;
+  const showLoadingProgress = progress => {
+    loading.querySelector('.progress').innerHTML = `${('0000' + progress).slice(-strLength)} / ${NUM_TEXTURES}`;
+  };
+
   // ローディング表示
   loading.style.display = 'flex';
+
+  showLoadingProgress(0);
 
   for (let i = 0; i < NUM_TEXTURES; i++) {
     // テクスチャ画像の読み込み
@@ -87,6 +94,8 @@ const main = async () => {
     // RGBA値のセット
     // i番目のテクスチャなので、テクスチャi枚の要素数をオフセットに指定
     pixelData.set(imageData.data, elementsPerTexture * i);
+
+    showLoadingProgress(i + 1);
   }
 
   // テクスチャを作成、転送
