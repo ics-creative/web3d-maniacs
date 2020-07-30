@@ -19,10 +19,11 @@ const main = async () => {
   if (!gl2) {
     // WebGL2をサポートしていない場合
     document.getElementById('content').style.display = 'none';
+    document.getElementById('notSupportedDescription').style.display = 'block';
     return;
   }
-  document.getElementById('notSupportedDescription').style.display = 'none';
   document.getElementById('container').style.width = `${CANVAS_WIDTH}px`;
+  document.getElementById('content').style.display = 'block';
 
   // 三角形の描画に必要なオブジェクト群を作成
   const triangleProgramSet = createTriangleProgramSet(gl2);

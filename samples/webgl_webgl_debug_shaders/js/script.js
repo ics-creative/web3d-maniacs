@@ -10,9 +10,9 @@ const main = async () => {
   if (!gl || !ext) {
     // WEBGL_debug_shaders拡張をサポートしていない場合
     document.getElementById('content').style.display = 'none';
+    document.getElementById('notSupportedDescription').style.display = 'block';
     return;
   }
-  document.getElementById('notSupportedDescription').style.display = 'none';
 
   ////////////////////////////////////////
   // 頂点シェーダー

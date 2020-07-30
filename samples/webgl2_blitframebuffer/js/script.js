@@ -13,9 +13,9 @@ const main = async () => {
   if (!gl2) {
     // WebGL2をサポートしていない場合
     canvas.style.display = 'none';
+    document.getElementById('notSupportedDescription').style.display = 'block';
     return;
   }
-  document.getElementById('notSupportedDescription').style.display = 'none';
 
   // 画像を読みこむ
   const textureImage = await new Promise(resolve => {
