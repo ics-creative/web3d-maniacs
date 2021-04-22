@@ -125,7 +125,7 @@ const main = async () => {
 
   for (let i = 0; i < NUM_TEXTURES; i++) {
     // テクスチャ画像の読み込み
-    const textureImage = await loadImage(`assets/${("0000000" + (i + 1)).slice(-8)}.jpg`);
+    const textureImage = await loadImage(`assets/${("0000000" + (i + 1)).slice(-8)}.JPG`);
     // テクスチャ画像をキャンバスに描画
     context2d.drawImage(textureImage, 0, 0);
     // RGBA値の取得
