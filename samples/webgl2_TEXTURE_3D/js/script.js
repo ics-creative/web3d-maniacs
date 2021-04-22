@@ -123,7 +123,8 @@ const main = async () => {
 
   showLoadingProgress(0);
 
-  for (let i = 0; i < NUM_TEXTURES; i++) {
+  let numCompletedImages = 0;
+  const taskList = [...Array(NUM_TEXTURES).keys()].map(i => new Promise(async resolve => {
     // テクスチャ画像の読み込み
     const textureImage = await loadImage(`assets/${("0000000" + (i + 1)).slice(-8)}.JPG`);
     // テクスチャ画像をキャンバスに描画
@@ -134,8 +135,13 @@ const main = async () => {
     // i番目のテクスチャなので、テクスチャi枚の要素数をオフセットに指定
     pixelData.set(imageData.data, elementsPerTexture * i);
 
-    showLoadingProgress(i + 1);
-  }
+    numCompletedImages += 1;
+    showLoadingProgress(numCompletedImages);
+
+    resolve();
+  }));
+
+  await Promise.all(taskList);
 
   // テクスチャを作成、転送
   const texture = gl2.createTexture();
