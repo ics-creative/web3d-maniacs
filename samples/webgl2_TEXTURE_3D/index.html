@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=960, user-scalable=no"/>
+  <meta name="google" content="notranslate"/>
+  <title>WebGL 2.0 - TEXTURE_3D</title>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+  <script defer type="module" src="js/script.js"></script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #notSupportedDescription {
+      display: none;
+    }
+
+    #content {
+      position: relative;
+    }
+
+    #myCanvas {
+      position: absolute;
+    }
+
+    #loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+    }
+
+    .title {
+      z-index: 1;
+      color: #fff;
+      text-align: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      animation: text-fade 300ms infinite linear;
+    }
+
+    .progress {
+      z-index: 1;
+      color: #fff;
+      text-align: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+    }
+
+    @keyframes text-fade {
+      0% {
+        opacity: 1;
+      }
+      25% {
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 0.9;
+      }
+      75% {
+        opacity: 0.6;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <p id="notSupportedDescription">
+    ※このデモはWebGL 2.0で作成しています。<a
+    href="https://caniuse.com/#feat=webgl2"
+    target="_blank"
+  >WebGL 2.0に対応したブラウザ</a
+  >でご覧ください。
+  </p>
+  <div id="content">
+    <canvas id="myCanvas"></canvas>
+    <div id="loading">
+      <span class="title">LOADING</span>
+      <span class="progress"></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
