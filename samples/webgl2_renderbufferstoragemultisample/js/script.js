@@ -268,12 +268,12 @@ const createTriangleProgramSet = gl2 => {
     1.0
   ]);
   const attributeList = [
-    { locationIndex: gl2.getAttribLocation(program, 'position'), size: 3 },
-    { locationIndex: gl2.getAttribLocation(program, 'color'), size: 4 }
+    {locationIndex: gl2.getAttribLocation(program, 'position'), size: 3},
+    {locationIndex: gl2.getAttribLocation(program, 'color'), size: 4}
   ];
   const vertexArrayObject = createVertexArray(gl2, vertices, attributeList);
 
-  return { program, vertexArrayObject, vertexCount: 3 };
+  return {program, vertexArrayObject, vertexCount: 3};
 };
 
 /**
@@ -346,8 +346,8 @@ const createPostEffectProgramSet = gl2 => {
   ]);
   const indices = new Uint32Array([0, 1, 2, 2, 1, 3]);
   const attributeList = [
-    { locationIndex: gl2.getAttribLocation(program, 'position'), size: 3 },
-    { locationIndex: gl2.getAttribLocation(program, 'uv'), size: 2 }
+    {locationIndex: gl2.getAttribLocation(program, 'position'), size: 3},
+    {locationIndex: gl2.getAttribLocation(program, 'uv'), size: 2}
   ];
   const vertexArrayObject = createVertexArray(
     gl2,
@@ -442,4 +442,6 @@ const createVertexArray = (gl2, vertices, attributeList, indices = null) => {
   return vertexArrayObject;
 };
 
-window.addEventListener('DOMContentLoaded', () => main());
+window.addEventListener('DOMContentLoaded', () => {
+  main();
+});

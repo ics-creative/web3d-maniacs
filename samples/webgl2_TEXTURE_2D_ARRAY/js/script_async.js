@@ -134,7 +134,7 @@ const loadAndUploadTextures = async (gl2, loading) => {
 
   const strLength = NUM_TEXTURES.toString().length;
   const showLoadingProgress = progress => {
-    loading.querySelector('.progress').innerHTML = `${('0000' + progress).slice(-strLength)} / ${NUM_TEXTURES}`;
+    loading.querySelector(".progress").innerHTML = `${String(progress).padStart(strLength, "0")} / ${NUM_TEXTURES}`;
   };
 
   // ローディング表示
@@ -144,10 +144,12 @@ const loadAndUploadTextures = async (gl2, loading) => {
 
   for (let i = 0; i < NUM_TEXTURES; i++) {
     // 少し遅延
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => {
+      setTimeout(resolve, 100);
+    });
 
     // テクスチャ画像の読み込み
-    const textureImage = await loadImage(`assets/photo_${('0000' + imageIndexArr[i]).slice(-5)}.jpg`);
+    const textureImage = await loadImage(`assets/photo_${String(imageIndexArr[i]).padStart(5, "0")}.jpg`);
     // テクスチャ画像をキャンバスに描画
     context2d.drawImage(textureImage, 0, 0);
     // RGBA値の取得
@@ -525,4 +527,6 @@ class CameraController {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => main());
+window.addEventListener('DOMContentLoaded', () => {
+  main();
+});

@@ -56,7 +56,9 @@ const main = async () => {
   document.getElementById("gui").appendChild(gui.domElement);
   const slider = gui.add(setting, "loop", 0, 12, 1);
   const input = slider.domElement.querySelector("input");
-  const updateFakeValue = () => input.value = 1 << input.value;
+  const updateFakeValue = () => {
+    input.value = (1 << parseInt(input.value)).toString();
+  };
   updateFakeValue();
   const updateDisplay = slider.updateDisplay;
   slider.updateDisplay = function () {
@@ -134,7 +136,9 @@ const main = async () => {
     if (disjoint) {
       // 計測をやり直す
       // 使用中のクエリを全て削除
-      querySet.usingList.forEach(query => gl2.deleteQuery(query));
+      querySet.usingList.forEach(query => {
+        gl2.deleteQuery(query);
+      });
       querySet.usingList = [];
 
       clearStatsData();
@@ -381,4 +385,6 @@ const createVertexArray = (gl2, attributeSetList, indices = null) => {
   return vertexArray;
 };
 
-window.addEventListener("DOMContentLoaded", () => main());
+window.addEventListener("DOMContentLoaded", () => {
+  main();
+});

@@ -1,3 +1,7 @@
+import {Camera} from "./Camera.js";
+import {RoundCameraController} from "./RoundCameraController.js";
+import {SceneObject} from "./SceneObject.js";
+
 const RAD = Math.PI / 180;
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 540;
@@ -8,10 +12,6 @@ const IMAGE_HEIGHT = 512;
 
 // テクスチャ数
 const NUM_TEXTURES = 351;
-
-import {Camera} from "./Camera.js";
-import {RoundCameraController} from "./RoundCameraController.js";
-import {SceneObject} from "./SceneObject.js";
 
 const main = async () => {
   const content = document.getElementById("content");
@@ -116,7 +116,7 @@ const main = async () => {
 
   const strLength = NUM_TEXTURES.toString().length;
   const showLoadingProgress = progress => {
-    loading.querySelector(".progress").innerHTML = `${("0000" + progress).slice(-strLength)} / ${NUM_TEXTURES}`;
+    loading.querySelector(".progress").innerHTML = `${String(progress).padStart(strLength, "0")} / ${NUM_TEXTURES}`;
   };
   // ローディング表示
   loading.style.display = "flex";
@@ -126,7 +126,7 @@ const main = async () => {
   let numCompletedImages = 0;
   const taskList = [...Array(NUM_TEXTURES).keys()].map(i => new Promise(async resolve => {
     // テクスチャ画像の読み込み
-    const textureImage = await loadImage(`assets/${("0000000" + (i + 1)).slice(-8)}.JPG`);
+    const textureImage = await loadImage(`assets/${String(i + 1).padStart(8, "0")}.JPG`);
     // テクスチャ画像をキャンバスに描画
     context2d.drawImage(textureImage, 0, 0);
     // RGBA値の取得
@@ -283,9 +283,9 @@ const createRenderProgramSet = gl2 => {
       vec3 textureCoord = vec3(0.5) - vec3(vPosition + eyeDirectionStep * (iteration - 1.0 - i));
       
       // テクスチャ座標が範囲内の場合のみ
-      if(textureCoord.x >= 0.0 && textureCoord.x <= 1.0 
-      && textureCoord.y >= 0.0 && textureCoord.y <= 1.0 
-      && textureCoord.z >= 0.0 && textureCoord.z <= 1.0 - slicePosition){
+      if(textureCoord.x > 0.0 && textureCoord.x < 1.0 
+      && textureCoord.y > 0.0 && textureCoord.y < 1.0 
+      && textureCoord.z > 0.0 && textureCoord.z < 1.0 - slicePosition){
         // texture()関数の第一引数にsampler3Dを指定し、第二引数にvec3(u, v, w)を指定する
         vec4 color = texture(texture3D, textureCoord);
         // しきい値未満の色の場合非表示とする
@@ -438,4 +438,6 @@ const createVertexArray = (gl2, attributeSetList, indices = null) => {
   return vertexArray;
 };
 
-window.addEventListener("DOMContentLoaded", () => main());
+window.addEventListener("DOMContentLoaded", () => {
+  main();
+});

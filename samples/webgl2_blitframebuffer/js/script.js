@@ -9,7 +9,7 @@ const main = async () => {
 
   // WebGL2コンテキスト（WebGL2RenderingContext）を取得
   // アンチエイリアスを無効に設定
-  const gl2 = canvas.getContext('webgl2', { antialias: false });
+  const gl2 = canvas.getContext('webgl2', {antialias: false});
   if (!gl2) {
     // WebGL2をサポートしていない場合
     canvas.style.display = 'none';
@@ -86,4 +86,6 @@ const main = async () => {
   );
 };
 
-window.addEventListener('DOMContentLoaded', () => main());
+window.addEventListener('DOMContentLoaded', () => {
+  main();
+});

@@ -76,7 +76,7 @@ const main = async () => {
 
   const strLength = NUM_TEXTURES.toString().length;
   const showLoadingProgress = progress => {
-    loading.querySelector('.progress').innerHTML = `${('0000' + progress).slice(-strLength)} / ${NUM_TEXTURES}`;
+    loading.querySelector(".progress").innerHTML = `${String(progress).padStart(strLength, "0")} / ${NUM_TEXTURES}`;
   };
 
   // ローディング表示
@@ -86,7 +86,7 @@ const main = async () => {
 
   for (let i = 0; i < NUM_TEXTURES; i++) {
     // テクスチャ画像の読み込み
-    const textureImage = await loadImage(`assets/photo_${('0000' + i).slice(-5)}.jpg`);
+    const textureImage = await loadImage(`assets/photo_${String(i).padStart(5, "0")}.jpg`);
     // テクスチャ画像をキャンバスに描画
     context2d.drawImage(textureImage, 0, 0);
     // RGBA値の取得
@@ -508,4 +508,6 @@ class CameraController {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => main());
+window.addEventListener('DOMContentLoaded', () => {
+  main();
+});
