@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=960, user-scalable=no"/>
+  <meta name="google" content="notranslate"/>
+  <title>WebGL 2.0 - ANY_SAMPLES_PASSED</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/lil-gui@0.16"></script>
+  <script defer src="js/script.js" type="module"></script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #notSupportedDescription {
+      display: none;
+    }
+
+    #content {
+      position: relative;
+    }
+
+    #myCanvas {
+      position: absolute;
+    }
+
+    #gui {
+      position: absolute;
+      right: 0px;
+    }
+
+    #stats {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      width: 140px;
+      height: 56px;
+      background-color: #000;
+    }
+
+    .stats-text {
+      color: #fff;
+      text-align: right;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+    }
+
+    .stats-title {
+      float: left;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <p id="notSupportedDescription">
+    ※このデモはWebGL 2.0で作成しています。<a
+    href="https://caniuse.com/#feat=webgl2"
+    target="_blank"
+  >WebGL 2.0に対応したブラウザ</a
+  >でご覧ください。
+  </p>
+  <div id="content">
+    <canvas id="myCanvas"></canvas>
+    <div id="gui"></div>
+    <div id="stats">
+      <span class="stats-title stats-text">RED</span>
+      <div id="red" class="stats-text">-</div>
+      <span class="stats-title stats-text">GREEN</span>
+      <div id="green" class="stats-text">-</div>
+      <span class="stats-title stats-text">BLUE</span>
+      <div id="blue" class="stats-text">-</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
