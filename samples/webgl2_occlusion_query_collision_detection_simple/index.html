@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, user-scalable=no"/>
+  <meta name="google" content="notranslate"/>
+  <title>WebGL 2.0 - GPU-based Collision Detection using Occlusion Query</title>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/3.4.2/gl-matrix-min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lil-gui@0.16.1"></script>
+  <script defer type="module" src="js/script.js"></script>
+</head>
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #notSupportedDescription {
+    display: none;
+  }
+
+  #content {
+    position: relative;
+  }
+
+  #gui {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+
+  #stats {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 120px;
+    height: 52px;
+    background-color: #000;
+  }
+
+  .stats-text {
+    color: #fff;
+    text-align: right;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+  }
+
+  .stats-title {
+    float: left;
+  }
+</style>
+<body>
+<div id="container">
+  <p id="notSupportedDescription">
+    ※このデモはWebGL 2.0で作成しています。<a
+          href="https://caniuse.com/#feat=webgl2"
+          target="_blank"
+  >WebGL 2.0に対応したブラウザ</a
+  >でご覧ください。
+  </p>
+  <div id="content">
+    <canvas id="myCanvas"></canvas>
+    <div id="gui"></div>
+    <div id="stats">
+      <span class="stats-title stats-text">A → B</span>
+      <div id="ab" class="stats-text">-</div>
+      <span class="stats-title stats-text">B → A</span>
+      <div id="ba" class="stats-text">-</div>
+      <span class="stats-title stats-text">collision</span>
+      <div id="collision" class="stats-text">-</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
