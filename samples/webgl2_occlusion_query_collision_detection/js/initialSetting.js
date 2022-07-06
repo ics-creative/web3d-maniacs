@@ -1,4 +1,4 @@
-import {decode, encode} from "./util/arrayBufferTobase64.js";
+import {decode, encode} from "./util/arrayBufferToBase64.js";
 
 /**
  * @public
